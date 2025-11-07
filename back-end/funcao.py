@@ -55,7 +55,7 @@ def atualizar_produto(id, nova_quantidade):
     if conexao:
         try:
             cursor.execute(
-                "UPDATE produtos SET quantidade = %s WHERE id = %s",
+                "UPDATE produtos SET quantidade = %s  WHERE id = %s",
                 (nova_quantidade, id)
             )
             conexao.commit()
@@ -64,6 +64,7 @@ def atualizar_produto(id, nova_quantidade):
         finally:
             cursor.close()
             conexao.commit()
+
 
 def remover_produto(id):
     conexao, cursor = conector()
@@ -79,5 +80,3 @@ def remover_produto(id):
         finally:
             cursor.close()
             conexao.commit()
-
-remover_produto(2)
