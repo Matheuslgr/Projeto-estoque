@@ -35,4 +35,17 @@ def cadastrar_produto(nome, categoria, preco, quantidade):
             cursor.close()
             conexao.commit()
 
-cadastrar_produto("Placa de Vídeo Galax NVIDIA GeForce RTX 3060", "alta performance", 1.839, 10)
+def listar_produto():
+    conexao, cursor = conector()
+    if conexao:
+        try:
+            cursor.execute(
+                "SELECT * FROM produtos ORDER BY id"
+            )
+            return cursor.fetchall()
+        except Exception as erro:
+            print(f"Erro ao listar os produtos {erro}")
+            return []
+        finally:
+            cursor.close()
+            conexao.commit()
