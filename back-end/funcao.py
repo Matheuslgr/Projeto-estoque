@@ -64,4 +64,20 @@ def atualizar_produto(id, nova_quantidade):
         finally:
             cursor.close()
             conexao.commit()
-atualizar_produto(1, 5)
+
+def remover_produto(id):
+    conexao, cursor = conector()
+    if conexao:
+        try:
+            cursor.execute(
+                "DELETE FROM produtos WHERE id = %s",
+                (id,)
+            )
+            conexao.commit()
+        except Exception as erro:
+            print(f"Erro ao remover o produto. {erro}")
+        finally:
+            cursor.close()
+            conexao.commit()
+
+remover_produto(2)
