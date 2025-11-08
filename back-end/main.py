@@ -28,3 +28,12 @@ def listar_produtos():
             }
         )
     return{"produtos": lista}
+
+@app.delete("/produtos/{id}")
+def deletar_produto(id: int):
+    produtos = funcao.buscar_produto(id)
+    if produtos:
+        funcao.remover_produto(id)
+        return{"200": "Produto excluido com sucesso!"}
+    else:
+        return{"erro": "filme não encontrado"}
