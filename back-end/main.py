@@ -36,7 +36,7 @@ def deletar_produto(id: int):
         funcao.remover_produto(id)
         return{"200": "Produto excluido com sucesso!"}
     else:
-        return{"erro": "filme não encontrado"}
+        return{"erro": "Produto não encontrado"}
     
 @app.put("/produtos/{id}")
 def atualizar_produto(id: int, nova_quantidade: float):
@@ -46,3 +46,8 @@ def atualizar_produto(id: int, nova_quantidade: float):
         return{"200": "produto atualizado."}
     else:
         return{"Erro": "produto não foi encontrado"}
+    
+@app.get("/valor_total")
+def get_valor_total():
+    valor_total = funcao.valor_total_produtos()
+    return{"valor_total": f"{valor_total:.2f}"}

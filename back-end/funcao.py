@@ -35,6 +35,7 @@ def cadastrar_produto(nome, categoria, preco, quantidade):
             cursor.close()
             conexao.commit()
 
+
 def listar_produto():
     conexao, cursor = conector()
     if conexao:
@@ -95,3 +96,23 @@ def buscar_produto(id):
         finally:
             cursor.close()
             conexao.commit()
+
+def valor_total_produtos():
+    valor_total = 0
+    conexao, cursor = conector()
+    if conexao:
+        try:
+            cursor.execute(
+                "SELECT preco, quantidade FROM produtos;"
+            )
+            for preco, quantidade in cursor.fetchall():
+                valor_total += preco * quantidade 
+        except Exception as erro:
+            print(f"Erro ao calcular o valor total {erro}")
+        finally:
+            cursor.close()
+            conexao.close()
+    return valor_total
+
+
+    
